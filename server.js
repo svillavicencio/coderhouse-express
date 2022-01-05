@@ -2,6 +2,7 @@ const Container = require('./index.js').default;
 
 const express = require('express')
 const app = express()
+const PORT = process.env.PORT || 8080;
 const container = new Container('productos.txt');
 
 
@@ -21,14 +22,6 @@ app.get('/productoRandom', function (req, res){
             container.getById(randomIntFromInterval(1, items.length + 1 )).then((item)=>{res.send(item)})
         })
     })
-    
-    // container.init().then(()=>{
-    //     let totalItems = 0;
-    //     container.getAll((items)=>{
-    //         totalItems = items.length
-    //         console.log(totalItems)
-    //     })
-    // })
 })
 
-app.listen(3000);
+app.listen(PORT, ()=>{console.log(`Iniciado en puerto ${PORT}`)});
